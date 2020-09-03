@@ -1,5 +1,6 @@
 package com.assem.gadsleaderboard.ui.home
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.assem.gadsleaderboard.R
+import com.assem.gadsleaderboard.ui.sumbit.SubmitActivity
 import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_HOURS
 import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_KEY
 import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_SKILL_IQ
@@ -16,6 +18,7 @@ import com.assem.gadsleaderboard.utils.UtilViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.toolbar.*
 import java.util.*
 
 class HomeActivity : AppCompatActivity() {
@@ -35,6 +38,9 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        toolbar_submit_button.setOnClickListener {
+            startActivity(Intent(this, SubmitActivity::class.java))
+        }
         tabLayout = activity_home_tab_layout
         viewPager = activity_home_view_pager
         setupTabLayout()

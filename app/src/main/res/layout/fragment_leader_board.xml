@@ -18,6 +18,6 @@
         android:id="@+id/fragment_leader_board_progress_bar"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background = "@drawable/progress_bar_bg"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:background="@drawable/progress_bar_bg" />
 </FrameLayout>
