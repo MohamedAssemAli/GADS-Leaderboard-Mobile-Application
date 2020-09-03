@@ -1,6 +1,6 @@
 package com.assem.gadsleaderboard.data.api
 
-import com.assem.gadsleaderboard.utils.ConstantsK.Companion.BASE_URL
+import com.assem.gadsleaderboard.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

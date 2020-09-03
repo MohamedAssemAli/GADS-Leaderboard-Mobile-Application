@@ -8,11 +8,12 @@ package com.assem.gadsleaderboard.utils
  */
 
 
-class ConstantsK {
+class Constants {
     companion object {
-        const val BASE_URL = "https://gadsapi.herokuapp.com/"
-        const val FILTER_HOURS = "api/hours"
-        const val FILTER_SKILL_IQ = "api/skilliq"
+        const val BASE_URL = "https://gadsapi.herokuapp.com/api/"
+        const val FILTER_HOURS = "hours"
+        const val FILTER_SKILL_IQ = "skilliq"
         const val FILTER_KEY = "filter"
+        const val TYPE_KEY = "type"
     }
 }

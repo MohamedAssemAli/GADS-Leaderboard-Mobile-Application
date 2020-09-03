@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.assem.gadsleaderboard.R
 import com.assem.gadsleaderboard.data.models.LeaderBoardResponseItem
+import com.assem.gadsleaderboard.utils.ImageViewUtils
 import kotlinx.android.synthetic.main.item_leadeboard.view.*
 
 
@@ -17,7 +18,7 @@ import kotlinx.android.synthetic.main.item_leadeboard.view.*
  * https://github.com/MohamedAssemAli
  */
 
-class LeaderBoardAdapter() :
+class LeaderBoardAdapter(val type: Boolean) :
     RecyclerView.Adapter<LeaderBoardAdapter.LeaderBoardViewHolder>() {
 
     class LeaderBoardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -37,6 +38,18 @@ class LeaderBoardAdapter() :
         val item = differ.currentList[position]
         holder.itemView.apply {
             item_leader_board_name.text = item.name
+            if (type)
+                item_leader_board_score.text = "${item.hours} Learning hours, ${item.country}"
+            else
+                item_leader_board_score.text = "${item.score} Skill IQ, ${item.country}"
+
+            ImageViewUtils.fitImage(
+                context,
+                item_leader_board_img,
+                item.badgeUrl
+//                ,R.drawable.ic_placeholder
+            )
+
         }
     }
 

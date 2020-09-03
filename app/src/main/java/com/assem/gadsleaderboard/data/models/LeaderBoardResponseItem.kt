@@ -10,6 +10,8 @@ data class LeaderBoardResponseItem(
     val country: String,
     @SerializedName("hours")
     val hours: Int,
+    @SerializedName("score")
+    val score: Int,
     @SerializedName("name")
     val name: String
 )

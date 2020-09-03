@@ -8,9 +8,10 @@ import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.assem.gadsleaderboard.R
-import com.assem.gadsleaderboard.utils.ConstantsK.Companion.FILTER_HOURS
-import com.assem.gadsleaderboard.utils.ConstantsK.Companion.FILTER_KEY
-import com.assem.gadsleaderboard.utils.ConstantsK.Companion.FILTER_SKILL_IQ
+import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_HOURS
+import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_KEY
+import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_SKILL_IQ
+import com.assem.gadsleaderboard.utils.Constants.Companion.TYPE_KEY
 import com.assem.gadsleaderboard.utils.UtilViewPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -44,11 +45,13 @@ class HomeActivity : AppCompatActivity() {
         val hoursFragment: Fragment = LeaderBoardFragment()
         val hoursBundle = Bundle()
         hoursBundle.putString(FILTER_KEY, FILTER_HOURS)
+        hoursBundle.putBoolean(TYPE_KEY, true)
         hoursFragment.arguments = hoursBundle
         //  completedFragment
         val skillIqFragment: Fragment = LeaderBoardFragment()
         val skillIqBundle = Bundle()
         skillIqBundle.putString(FILTER_KEY, FILTER_SKILL_IQ)
+        skillIqBundle.putBoolean(TYPE_KEY, false)
         skillIqFragment.arguments = skillIqBundle
         // setup viewpager
         val fragments = arrayOf(hoursFragment, skillIqFragment)
