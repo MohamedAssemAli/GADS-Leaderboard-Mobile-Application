@@ -1,16 +1,18 @@
 package com.assem.gadsleaderboard.ui.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.assem.gadsleaderboard.R
 import com.assem.gadsleaderboard.ui.home.adapters.LeaderBoardAdapter
-import com.assem.gadsleaderboard.utils.Constants
 import com.assem.gadsleaderboard.utils.Constants.Companion.FILTER_KEY
 import com.assem.gadsleaderboard.utils.Constants.Companion.TYPE_KEY
 import com.assem.gadsleaderboard.utils.Resource
@@ -20,6 +22,7 @@ class LeaderBoardFragment : Fragment() {
 
     // views
     private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
 
     // vars
     private lateinit var leaderBoardAdapter: LeaderBoardAdapter
@@ -38,6 +41,7 @@ class LeaderBoardFragment : Fragment() {
             isHoursFlag = arguments!!.getBoolean(TYPE_KEY)
         }
         leaderBoardAdapter = LeaderBoardAdapter(isHoursFlag)
+        progressBar = view.fragment_leader_board_progress_bar
         recyclerView = view.fragment_leader_board_recycler_View
         recyclerView.apply {
             adapter = leaderBoardAdapter
@@ -52,17 +56,13 @@ class LeaderBoardFragment : Fragment() {
         viewModel.leaderBoardMutableLiveData.observe(this, { response ->
             when (response) {
                 is Resource.Loading -> {
-                    Toast.makeText(requireContext(), "Loading", Toast.LENGTH_LONG).show()
+                    showProgress(true)
                 }
                 is Resource.Success -> {
-                    response.data?.let { response ->
-                        leaderBoardAdapter.differ.submitList(response)
+                    response.data?.let { date ->
+                        leaderBoardAdapter.differ.submitList(date)
+                        showProgress(false)
                     }
-                    Toast.makeText(
-                        requireContext(),
-                        "Success => ${response.data!!.size}",
-                        Toast.LENGTH_LONG
-                    ).show()
                 }
                 is Resource.Error -> {
                     Toast.makeText(
@@ -70,9 +70,19 @@ class LeaderBoardFragment : Fragment() {
                         "Error => ${response.message}",
                         Toast.LENGTH_LONG
                     ).show()
-                    println("Assem => ${response.message}")
                 }
             }
         })
+    }
+
+
+    private fun showProgress(flag: Boolean) {
+        if (flag) {
+            recyclerView.visibility = GONE
+            progressBar.visibility = VISIBLE
+        } else {
+            recyclerView.visibility = VISIBLE
+            progressBar.visibility = GONE
+        }
     }
 }

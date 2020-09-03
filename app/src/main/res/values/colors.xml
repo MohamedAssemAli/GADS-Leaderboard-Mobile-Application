@@ -5,4 +5,5 @@
     <color name="colorAccent">#f1f3f8</color>
     <color name="color_secondary_text">#B1B0B0</color>
     <color name="white">#FFFFFF</color>
+    <color name="progress_color">#03A9F4</color>
 </resources>
