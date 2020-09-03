@@ -1,4 +1,4 @@
-package com.assem.gadsleaderboard.ui
+package com.assem.gadsleaderboard.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +13,7 @@ import java.lang.Exception
 /**
  * Created by Mohamed Assem on 03-Sep-20.
  * mohamed.assem.ali@gmail.com
+ * https://github.com/MohamedAssemAli
  */
 
 class LeaderBoardViewModel : ViewModel() {
