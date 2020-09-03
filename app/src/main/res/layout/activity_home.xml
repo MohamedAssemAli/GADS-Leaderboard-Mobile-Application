@@ -5,14 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/toolbar" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/activity_home_tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/colorAccent"
         app:tabRippleColor="@android:color/transparent"
-        app:tabSelectedTextColor="@color/colorAccent" />
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="@color/color_secondary_text" />
 
     <FrameLayout
         android:layout_width="match_parent"
