@@ -1,0 +1,64 @@
+package com.assem.gadsleaderboard.ui.home.adapters
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.assem.gadsleaderboard.R
+import com.assem.gadsleaderboard.data.models.LeaderBoardResponseItem
+import kotlinx.android.synthetic.main.item_leadeboard.view.*
+
+
+/**
+ * Created by Mohamed Assem on 03-Sep-2020.
+ * mo7mad.assim@gmail.com
+ * https://github.com/MohamedAssemAli
+ */
+
+class LeaderBoardAdapter() :
+    RecyclerView.Adapter<LeaderBoardAdapter.LeaderBoardViewHolder>() {
+
+    class LeaderBoardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderBoardViewHolder {
+        return LeaderBoardViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(
+                    R.layout.item_leadeboard,
+                    parent,
+                    false
+                )
+        )
+    }
+
+    override fun onBindViewHolder(holder: LeaderBoardViewHolder, position: Int) {
+        val item = differ.currentList[position]
+        holder.itemView.apply {
+            item_leader_board_name.text = item.name
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
+
+    private val differCallback = object : DiffUtil.ItemCallback<LeaderBoardResponseItem>() {
+        override fun areItemsTheSame(
+            oldItem: LeaderBoardResponseItem,
+            newItem: LeaderBoardResponseItem
+        ): Boolean {
+            return oldItem.name == newItem.name
+        }
+
+        override fun areContentsTheSame(
+            oldItem: LeaderBoardResponseItem,
+            newItem: LeaderBoardResponseItem
+        ): Boolean {
+            return oldItem == newItem
+        }
+    }
+
+    val differ = AsyncListDiffer(this, differCallback)
+}
