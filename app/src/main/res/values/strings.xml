@@ -11,4 +11,21 @@
     <string name="last_name">Last Name</string>
     <string name="email">Email address</string>
     <string name="link">Project on GITHUB (link)</string>
+    <!--    Validation-->
+    <string name="please_add_first_name">Full name is required</string>
+    <string name="invalid_first_name">Invalid first name</string>
+    <string name="please_add_last_name">last name is required</string>
+    <string name="invalid_last_name">Invalid last name</string>
+    <string name="please_add_email">Email is required</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="please_add_link">Link is required</string>
+    <string name="invalid_link">Invalid link</string>
+    <!--    dialogs-->
+    <string name="are_you_sure">Are you sure</string>
+    <string name="question_mark">\?</string>
+    <string name="yes">Yes</string>
+    <string name="close">close</string>
+    <string name="submission_successful">Submission Successful</string>
+    <string name="submission_not_successful">Submission not Successful</string>
+    <string name="retry">Retry</string>
 </resources>
