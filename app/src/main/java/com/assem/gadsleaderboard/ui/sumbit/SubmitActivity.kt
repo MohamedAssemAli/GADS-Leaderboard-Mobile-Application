@@ -66,18 +66,19 @@ class SubmitActivity : AppCompatActivity() {
         viewModel.submissionMutableLiveData.observe(this, { response ->
             when (response) {
                 is Resource.Loading -> {
-                    showProgress()
+                    showProgress(true)
                 }
                 is Resource.Success -> {
                     showSuccessAlertDialog()
+                    showProgress(false)
                 }
                 is Resource.Error -> {
                     showErrorAlertDialog()
+                    showProgress(false)
                 }
             }
         })
     }
-
 
     private fun showConfirmationAlertDialog() {
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -166,13 +167,11 @@ class SubmitActivity : AppCompatActivity() {
         return isValidFirstName && isValidLastName && isValidEmail && isValidLink
     }
 
-    private fun showProgress() {
-        progress_layout.visibility = View.VISIBLE
-//
-//        if (flag) {
-//            progress_layout.visibility = View.VISIBLE
-//        } else {
-//            progress_layout.visibility = View.GONE
-//        }
+    private fun showProgress(flag: Boolean) {
+        if (flag) {
+            progresbarLayout.visibility = View.VISIBLE
+        } else {
+            progresbarLayout.visibility = View.GONE
+        }
     }
 }

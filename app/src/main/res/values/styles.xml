@@ -23,12 +23,24 @@
 
 
     <style name="text_input_layout_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:layout_margin">@dimen/margin_padding_size_small</item>
         <item name="boxStrokeColor">@color/orange</item>
         <item name="startIconTint">@color/orange</item>
         <item name="hintTextColor">@color/orange</item>
         <item name="errorTextColor">@color/red</item>
         <item name="boxBackgroundColor">@color/white</item>
+        <!-- reference our hint & error styles -->
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/orange</item>
+        <item name="colorControlHighlight">@color/progress_color</item>
+    </style>
+
+    <style name="temp" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/orange</item>
+        <item name="strokeWidth">@dimen/margin_padding_size_micro</item>
+        <item name="hintTextAppearance">@style/HintText</item>
+        <item name="errorTextAppearance">@style/ErrorText</item>
     </style>
 
     <style name="edit_text_style">
@@ -37,4 +49,13 @@
         <item name="android:textColorHint">@color/color_secondary_text</item>
     </style>
 
+    <style name="ErrorText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="HintText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
 </resources>

@@ -36,32 +36,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_padding_size_small"
+            android:layout_margin="@dimen/margin_padding_size_medium"
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_submit_first_name_text_layout"
-                style="@style/text_input_layout_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="textPersonName">
+                android:layout_marginEnd="@dimen/margin_padding_size_micro"
+                android:inputType="textPersonName"
+                android:theme="@style/temp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"
                     android:imeOptions="actionNext"
+                    android:maxLines="1"
+                    android:inputType="textPersonName"
                     android:textColor="@color/colorPrimary"
-                    android:textColorHint="@color/color_secondary_text" />
+                    android:textColorHint="@color/color_secondary_text"
+                    android:theme="@style/edit_text_style" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/activity_submit_last_name_text_layout"
-                style="@style/text_input_layout_style"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginStart="@dimen/margin_padding_size_micro"
+                android:layout_weight="1"
+                android:theme="@style/text_input_layout_style">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -76,10 +81,10 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_submit_email_text_layout"
-            style="@style/text_input_layout_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_padding_size_medium">
+            android:layout_margin="@dimen/margin_padding_size_medium"
+            android:theme="@style/text_input_layout_style">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -88,16 +93,17 @@
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/color_secondary_text" />
+                android:textColorHint="@color/color_secondary_text"
+                android:theme="@style/edit_text_style" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_submit_link_text_layout"
-            style="@style/text_input_layout_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_padding_size_medium">
+            android:layout_margin="@dimen/margin_padding_size_medium"
+            android:theme="@style/text_input_layout_style">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -106,7 +112,8 @@
                 android:imeOptions="actionDone"
                 android:inputType="text"
                 android:textColor="@color/colorPrimary"
-                android:textColorHint="@color/color_secondary_text" />
+                android:textColorHint="@color/color_secondary_text"
+                android:theme="@style/edit_text_style" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
@@ -120,5 +127,7 @@
             android:text="@string/submit" />
     </LinearLayout>
 
-    <include layout="@layout/progressbar" />
+    <include
+        layout="@layout/progressbar"
+        android:visibility="gone" />
 </FrameLayout>
