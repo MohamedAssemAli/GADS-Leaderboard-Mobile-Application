@@ -7,8 +7,8 @@ import android.os.Looper
 import android.view.View
 import android.webkit.URLUtil
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.assem.gadsleaderboard.R
@@ -17,6 +17,7 @@ import com.assem.gadsleaderboard.utils.Resource
 import com.assem.gadsleaderboard.utils.Validation
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.activity_submit.*
+import kotlinx.android.synthetic.main.progressbar.*
 
 class SubmitActivity : AppCompatActivity() {
 
@@ -26,6 +27,7 @@ class SubmitActivity : AppCompatActivity() {
     private lateinit var emailTextInputLayout: TextInputLayout
     private lateinit var linkTextInputLayout: TextInputLayout
     private lateinit var submitButton: Button
+    private lateinit var progresbarLayout: FrameLayout
 
     // vars
     private lateinit var viewModel: SubmissionViewModel
@@ -48,6 +50,8 @@ class SubmitActivity : AppCompatActivity() {
         emailTextInputLayout = activity_submit_email_text_layout
         linkTextInputLayout = activity_submit_link_text_layout
         submitButton = activity_submit_button
+        progresbarLayout = progress_layout
+
         // OnClickListener
         submitButton.setOnClickListener { confirmInput() }
     }
@@ -62,7 +66,7 @@ class SubmitActivity : AppCompatActivity() {
         viewModel.submissionMutableLiveData.observe(this, { response ->
             when (response) {
                 is Resource.Loading -> {
-                    showProgress(true)
+                    showProgress()
                 }
                 is Resource.Success -> {
                     showSuccessAlertDialog()
@@ -72,6 +76,53 @@ class SubmitActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+
+    private fun showConfirmationAlertDialog() {
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
+        val dialogView: View = layoutInflater.inflate(R.layout.dialog_confirmation, null)
+        dialogBuilder.setView(dialogView)
+
+        val cancelButton: ImageButton = dialogView.findViewById(R.id.dialog_confirmation_close)
+        val yesButton: Button = dialogView.findViewById(R.id.dialog_confirmation_yes)
+
+        val confirmationAlertDialog = dialogBuilder.create()
+        confirmationAlertDialog.setCanceledOnTouchOutside(false)
+        confirmationAlertDialog.show()
+
+        cancelButton.setOnClickListener { confirmationAlertDialog.dismiss() }
+        yesButton.setOnClickListener {
+            confirmationAlertDialog.dismiss()
+            submitProject()
+        }
+    }
+
+    private fun showErrorAlertDialog() {
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
+        val dialogView: View = layoutInflater.inflate(R.layout.dialog_error, null)
+        dialogBuilder.setView(dialogView)
+        val alertDialog = dialogBuilder.create()
+        alertDialog.setCanceledOnTouchOutside(false)
+        alertDialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            alertDialog.dismiss()
+        }, 2000)
+    }
+
+    private fun showSuccessAlertDialog() {
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
+        val dialogView: View = layoutInflater.inflate(R.layout.dialog_success, null)
+        dialogBuilder.setView(dialogView)
+        val alertDialog = dialogBuilder.create()
+        alertDialog.setCanceledOnTouchOutside(false)
+        alertDialog.show()
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            alertDialog.dismiss()
+            finish()
+        }, 2000)
     }
 
     private fun validateInput(): Boolean {
@@ -115,56 +166,13 @@ class SubmitActivity : AppCompatActivity() {
         return isValidFirstName && isValidLastName && isValidEmail && isValidLink
     }
 
-    private fun showConfirmationAlertDialog() {
-        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-        val dialogView: View = layoutInflater.inflate(R.layout.dialog_confirmation, null)
-        dialogBuilder.setView(dialogView)
-
-        val cancelButton: ImageButton = dialogView.findViewById(R.id.dialog_confirmation_close)
-        val yesButton: Button = dialogView.findViewById(R.id.dialog_confirmation_yes)
-
-        val confirmationAlertDialog = dialogBuilder.create()
-        confirmationAlertDialog.setCanceledOnTouchOutside(false)
-        confirmationAlertDialog.show()
-
-        cancelButton.setOnClickListener { confirmationAlertDialog.dismiss() }
-        yesButton.setOnClickListener { submitProject() }
-    }
-
-    private fun showErrorAlertDialog() {
-        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-        val dialogView: View = layoutInflater.inflate(R.layout.dialog_error, null)
-        dialogBuilder.setView(dialogView)
-        val alertDialog = dialogBuilder.create()
-        alertDialog.setCanceledOnTouchOutside(false)
-        alertDialog.show()
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            alertDialog.dismiss()
-        }, 2000)
-    }
-
-    private fun showSuccessAlertDialog() {
-        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(this)
-        val dialogView: View = layoutInflater.inflate(R.layout.dialog_success, null)
-        dialogBuilder.setView(dialogView)
-        val alertDialog = dialogBuilder.create()
-        alertDialog.setCanceledOnTouchOutside(false)
-        alertDialog.show()
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            alertDialog.dismiss()
-            finish()
-        }, 2000)
-    }
-
-    private fun showProgress(flag: Boolean) {
-        if (flag) {
-//            recyclerView.visibility = View.GONE
-//            progressBar.visibility = View.VISIBLE
-        } else {
-//            recyclerView.visibility = View.VISIBLE
-//            progressBar.visibility = View.GONE
-        }
+    private fun showProgress() {
+        progress_layout.visibility = View.VISIBLE
+//
+//        if (flag) {
+//            progress_layout.visibility = View.VISIBLE
+//        } else {
+//            progress_layout.visibility = View.GONE
+//        }
     }
 }

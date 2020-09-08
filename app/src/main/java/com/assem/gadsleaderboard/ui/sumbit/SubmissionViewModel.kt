@@ -17,10 +17,10 @@ import java.lang.Exception
 class SubmissionViewModel : ViewModel() {
 
     // repo
-    val submissionRepository = SubmissionRepository()
+    private val submissionRepository = SubmissionRepository()
 
     // liveData
-    var submissionMutableLiveData: MutableLiveData<Resource<Void>> =
+    var submissionMutableLiveData: MutableLiveData<Resource<Boolean>> =
         MutableLiveData()
 
     fun submitProject(
@@ -35,9 +35,7 @@ class SubmissionViewModel : ViewModel() {
             val response =
                 submissionRepository.submitProject(url, email, firstName, lastName, projectLink)
             if (response.isSuccessful) {
-                response.body()?.let { submitResponse ->
-                    submissionMutableLiveData.postValue(Resource.Success(submitResponse))
-                }
+                submissionMutableLiveData.postValue(Resource.Success(true))
             } else {
                 submissionMutableLiveData.postValue(Resource.Error("Response Failed"))
             }
